@@ -13,6 +13,8 @@
         foaf:mbox <kyle@kneit.in>
     ];
     doap:license <http://opensource.org/licenses/BSD-3-Clause>;
+    lvs:minorversion 0;
+    lvs:microversion 0;
 
     lv2:port [
         a lv2:AudioPort, lv2:OutputPort;
