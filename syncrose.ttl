@@ -1,0 +1,28 @@
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+<http://kneit.in/plugins/syncore>
+    a lv2:Plugin , lv2:InstrumentPlugin;
+    lv2:binary <syncore.so>;
+    doap:name "Syncrose Granular Synthesizer";
+    doap:maintainer [
+        foaf:name "Kyle Kneitinger";
+        foaf:homepage <http://github.com/kneitinger/syncore>;
+        foaf:mbox <kyle@kneit.in>
+    ];
+    doap:license <http://opensource.org/licenses/BSD-3-Clause>;
+
+    lv2:port [
+        a lv2:AudioPort, lv2:OutputPort;
+        lv2:index 1;
+        lv2:symbol "left";
+        lv2:name "Left";
+    ], [
+        a lv2:AudioPort, lv2:OutputPort;
+        lv2:index 2;
+        lv2:symbol "right";
+        lv2:name "Right";
+    ]
+.
