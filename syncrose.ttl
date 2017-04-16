@@ -3,13 +3,13 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
-<http://kneit.in/plugins/syncore>
+<http://kneit.in/plugins/syncrose>
     a lv2:Plugin , lv2:InstrumentPlugin;
-    lv2:binary <syncore.so>;
+    lv2:binary <syncrose.so>;
     doap:name "Syncrose Granular Synthesizer";
     doap:maintainer [
         foaf:name "Kyle Kneitinger";
-        foaf:homepage <http://github.com/kneitinger/syncore>;
+        foaf:homepage <http://github.com/kneitinger/syncrose>;
         foaf:mbox <kyle@kneit.in>
     ];
     doap:license <http://opensource.org/licenses/BSD-3-Clause>;
