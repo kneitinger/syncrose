@@ -8,7 +8,7 @@ $(BUNDLE): manifest.ttl syncrose.ttl syncrose.so
 	cp manifest.ttl syncrose.ttl syncrose.so $(BUNDLE)
 
 syncrose.so: syncrose.c
-	$(CC) -shared -Wall -fPIC -DPIC syncrose.c `pkg-config --cflags --libs lv2-plugin sndfile samplerate` -lexpat -lm -o syncrose.so
+	$(CC) -shared -Wall -fPIC -DPIC syncrose.c `pkg-config --cflags --libs lv2 sndfile samplerate` -lexpat -lm -o syncrose.so
 
 install: $(BUNDLE)
 	mkdir -p $(INSTALL_DIR)
