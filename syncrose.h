@@ -32,4 +32,10 @@ typedef struct {
     float*  output_right;
 } Syncrose;
 
+typedef enum {
+    NORMAL   = 0,
+    REVERSE  = 1,
+    PINGPONG = 2
+} SYNCROSE_LMODE;
+
 #endif
