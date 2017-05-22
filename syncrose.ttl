@@ -1,5 +1,6 @@
 @prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
@@ -13,18 +14,17 @@
         foaf:mbox <kyle@kneit.in>
     ];
     doap:license <http://opensource.org/licenses/BSD-3-Clause>;
-    lvs:minorversion 0;
-    lvs:microversion 0;
+    lv2:minorversion 0;
+    lv2:microversion 0;
 
     lv2:port [
-        a lv2:AudioPort, lv2:OutputPort;
-        lv2:index 1;
+        a lv2:OutputPort , lv2:AudioPort ;
+        lv2:index 0;
         lv2:symbol "left";
-        lv2:name "Left";
+        lv2:name "Left"
     ], [
-        a lv2:AudioPort, lv2:OutputPort;
-        lv2:index 2;
+        a lv2:OutputPort , lv2:AudioPort;
+        lv2:index 1;
         lv2:symbol "right";
-        lv2:name "Right";
-    ]
-.
+        lv2:name "Right"
+    ] .
