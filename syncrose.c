@@ -44,20 +44,6 @@ activate(LV2_Handle instance)
 {
 }
 
-
-
-static void
-deactivate(LV2_Handle instance)
-{
-}
-
-static void
-cleanup(LV2_Handle instance)
-{
-    free(instance);
-}
-
-
 static void
 run(LV2_Handle instance, uint32_t n_samples)
 {
@@ -71,6 +57,19 @@ run(LV2_Handle instance, uint32_t n_samples)
         output_right[pos] = 0;
     }
 }
+
+
+static void
+deactivate(LV2_Handle instance)
+{
+}
+
+static void
+cleanup(LV2_Handle instance)
+{
+    free(instance);
+}
+
 
 static const void*
 extension_data(const char* uri)
