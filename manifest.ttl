@@ -1,7 +1,13 @@
 @prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
 <http://kneit.in/plugins/syncrose>
-    a lv2:Plugin;
-    lv2:binary   <syncrose.so> ;
-    rdfs:seeAlso <syncrose.ttl> .
+	a lv2:Plugin ;
+	lv2:binary <syncrose.so> ;
+	rdfs:seeAlso <syncrose.ttl> .
+
+<http://kneit.in/plugins/syncrose#ui>
+	a ui:GtkUI ;
+	ui:binary <syncrose_ui.so> ;
+	rdfs:seeAlso <syncrose.ttl> .

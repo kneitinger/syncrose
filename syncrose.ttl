@@ -1,30 +1,99 @@
-@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
-@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
+@prefix patch: <http://lv2plug.in/ns/ext/patch#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix ui:    <http://lv2plug.in/ns/extensions/ui#> .
+@prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
+@prefix work:  <http://lv2plug.in/ns/ext/worker#> .
+@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
+
+<http://kneit.in/plugins/syncrose#sample>
+    a lv2:Parameter ;
+    rdfs:label "sample" ;
+    rdfs:range atom:Path .
+
 
 <http://kneit.in/plugins/syncrose>
-    a lv2:Plugin , lv2:InstrumentPlugin;
-    lv2:binary <syncrose.so>;
-    doap:name "Syncrose Granular Synthesizer";
+    a lv2:Plugin ;
+    a lv2:InstrumentPlugin ;
+    doap:name "Syncrose Granular Synthesizer" ;
     doap:maintainer [
         foaf:name "Kyle Kneitinger";
         foaf:homepage <http://github.com/kneitinger/syncrose>;
         foaf:mbox <kyle@kneit.in>
     ];
-    doap:license <http://opensource.org/licenses/BSD-3-Clause>;
-    lv2:minorversion 0;
-    lv2:microversion 0;
-
+    doap:license <http://opensource.org/licenses/BSD-3-Clause> ;
+    lv2:project <http://lv2plug.in/ns/lv2> ;
+    lv2:requiredFeature urid:map ,
+        work:schedule ;
+    lv2:optionalFeature lv2:hardRTCapable ,
+        state:loadDefaultState ;
+    lv2:extensionData state:interface ,
+        work:interface ;
+    ui:ui <http://kneit.in/plugins/syncrose#ui> ;
+    patch:writable <http://kneit.in/plugins/syncrose#sample> ;
+    patch:writable param:gain ;
     lv2:port [
-        a lv2:OutputPort , lv2:AudioPort ;
-        lv2:index 0;
-        lv2:symbol "left";
-        lv2:name "Left"
-    ], [
-        a lv2:OutputPort , lv2:AudioPort;
-        lv2:index 1;
-        lv2:symbol "right";
-        lv2:name "Right"
+        a lv2:InputPort ,
+            atom:AtomPort ;
+        atom:bufferType atom:Sequence ;
+        atom:supports <http://lv2plug.in/ns/ext/midi#MidiEvent> ,
+            patch:Message ;
+        lv2:designation lv2:control ;
+        lv2:index 0 ;
+        lv2:symbol "control" ;
+        lv2:name "Control"
+    ] , [
+        a lv2:OutputPort ,
+            atom:AtomPort ;
+        atom:bufferType atom:Sequence ;
+        atom:supports patch:Message ;
+        lv2:designation lv2:control ;
+        lv2:index 1 ;
+        lv2:symbol "notify" ;
+        lv2:name "Notify"
+    ] , [
+        a lv2:AudioPort ,
+            lv2:OutputPort ;
+        lv2:index 2 ;
+        lv2:symbol "out" ;
+        lv2:name "Out"
+    ] ,[
+        a lv2:InputPort;
+        a lv2:ControlPort;
+        lv2:index 3;
+        lv2:symbol "start";
+        lv2:name "Start";
+        lv2:default 0.0;
+        lv2:minimum 0.0;
+        lv2:maximum 1.0;
+    ] ,[
+        a lv2:InputPort;
+        a lv2:ControlPort;
+        lv2:index 4;
+        lv2:symbol "step";
+        lv2:name "Step";
+        lv2:default 1.0;
+        lv2:minimum 0.0;
+        lv2:maximum 1.0;
+    ] ;
+
+
+
+
+    state:state [
+        <http://kneit.in/plugins/syncrose#sample> <clip.wav>
+    ] .
+
+<http://kneit.in/plugins/syncrose#ui>
+    a ui:GtkUI ;
+    lv2:requiredFeature urid:map ;
+    lv2:extensionData ui:showInterface ;
+    ui:portNotification [
+        ui:plugin <http://kneit.in/plugins/syncrose> ;
+        lv2:symbol "notify" ;
+        ui:notifyType atom:Blank
     ] .
